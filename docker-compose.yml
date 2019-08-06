@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  graph:
+    image: tinkerpop/gremlin-server:3.4.2
+    ports:
+      - 8182:8182
+    volumes:
+      - ./gremlin-server:/opt/gremlin-server/conf
+      - graph-data:/opt/gremlin-server/data
+  console:
+    image: tinkerpop/gremlin-console:3.4.2
+    command: "-i conf/remote.groovy"
+    volumes:
+      - ./gremlin-console:/opt/gremlin-console/conf
+
+volumes:
+  graph-data:
